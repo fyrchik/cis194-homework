@@ -105,7 +105,7 @@ intPair =  fmap (++) (pToList posInt)
 -- Alternative Maybe Keepo
 instance Alternative Parser where
   empty = Parser (const Nothing)
-  p1 <|> p2 = Parser (\s -> runParser p1 s <|> runParser p2 s)
+  (Parser p1) <|> (Parser p2) = Parser (liftA2 (<|>) p1 p2)
 
 -- Exercise 5
 forget :: Parser a -> Parser ()
